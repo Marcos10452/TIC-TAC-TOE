@@ -26,7 +26,7 @@ unwinds.
 
 minimax algorithm 
 
-![Alt text](/pic/Algo?raw=true "minimax algorithm")
+![Alt text](/pic/Algo.png?raw=true "minimax algorithm")
 
 
 
@@ -156,8 +156,8 @@ Room for improvement:
 
 
 ## Bibliography/Acknowledgements
--Stuart j. Russell (2018) Arificial Intelligence A modern Approach 3rd edition 
--Lecture 9: Game Playing 1 - Minimax, Alpha-beta Pruning | Stanford CS221: AI (Autumn 2019)
+- Stuart j. Russell (2018) Arificial Intelligence A modern Approach 3rd edition 
+- Lecture 9: Game Playing 1 - Minimax, Alpha-beta Pruning | Stanford CS221: AI (Autumn 2019)
 
 
 ## Contact

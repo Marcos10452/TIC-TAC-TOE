@@ -1,51 +1,24 @@
-# Project description
+import numpy as np
 
-TIC-TAC-TOE with minimax algorithm
-Using minimax algorithm to play a TIC-TAC-TOE game between human and machine.
-
-
-##  Requirements
-
-- Hardware: GPU was not needed in this first approch. However if more parameters are added and neurons are incremented  GPU will be needed or training on Colab.
-Intel(R) Core(TM) i5-4200M CPU @ 2.50GHz Memory 8GB
-
-- It was developed in Linux Ubuntu 16.04.7 LTS
-
-- Python 3.7
+import sys
+sys.setrecursionlimit(1000)
 
 
-## General Information
-
-The idea was to create a game which can play agains a person.
-So, for this project minimax algorithm was selected.
-
-It uses a simple recursive computation of the minimax values of each successor state, directly
-implementing the defining equations. The recursion proceeds all the way down to the leaves
-of the tree, and then the minimax values are backed up through the tree as the recursion
-unwinds. 
-
-minimax algorithm 
-
-![Alt text](/pic/Algo?raw=true "minimax algorithm")
-
-
-
-1)Define TIC-TAC-TOE class
+############################################################
 
 class TicTacToe():
-    
     def __init__(self):
         
         self.auxboard=[ [0.,0.,0.],
                         [0.,0.,0.],
-                        [0.,0.,0.]]
-        
+                        [0.,0.,0.]
+                      ]
         self.printboard=[["-","-","-"],
                          ["-","-","-"],
-                         ["-","-","-"]]
+                         ["-","-","-"]
+                      ]
 
-    # Start
-	def startState(self):
+    def startState(self):
         self.update_board(self.auxboard)
         return (+1,self.auxboard)
     
@@ -74,12 +47,14 @@ class TicTacToe():
     def succ(self, state, action):
         player,state_board  = state
         #I need to copy a list in order to be recursive
-        #but copy() DOESNT work for more 1D matrix
+        #but copy DOESNT work for more 1D matrix
         #I had to use MAP instead
-        auxlist=list(map(list, state_board))
+        auxlist=auxlist=list(map(list, state_board))
         auxlist[action[0]][action[1]]=player
         return (-player,auxlist)  
-	#Check whether game has finished (Win or tie)
+
+
+
     def isEnd(self, state):
         player, state_board = state
         #row completed
@@ -108,9 +83,20 @@ class TicTacToe():
         player, state_board = state
         return player
 
+############################################################
+# Policies
 
-1)minimax algorithm
-
+def humanPolicy(game, state):
+    action2=[0,0]
+    while True:
+        print ('humanPolicy: Enter move:')
+        action2[0] = input('y row ').strip()
+        action2[1] = input('x column ').strip()
+        action2=list(map(int,action2))
+        if action2 in game.actions(state):
+            return action2
+        else:
+            print("ERROR, cell is already in use {} {}" .format(action2[1],action2[0]))
 
 def minimaxPolicy(game, state):
     print("Thinking...!! wait")
@@ -127,11 +113,10 @@ def minimaxPolicy(game, state):
             return (game.utility(state), None)
                 
         # List of (utility of succ, action leading to that succ)
-		# Candidates return MAX or MIN utility due to accions
+        
         candidates = [
             (recurse(game.succ(state, action))[0], action)
             for action in game.actions(state)]
-
         #Agent player maximaice
         player = game.player(state)
         if player == +1:
@@ -145,23 +130,38 @@ def minimaxPolicy(game, state):
     print("DONE...")
     return action
 
+############################################################
 
-## Usage
-In terminal type:
-python TIC_TAC_TOE.py
+game = TicTacToe()
 
-Room for improvement:
-- The problem with minimax search is that the number of game states it has to examine is
-  exponential in the depth of the tree. So a solution is to use alpha–beta pruning. 
+policies = {
+    +1: humanPolicy,
+    -1: minimaxPolicy
+            }
 
+state = game.startState()
 
-## Bibliography/Acknowledgements
--Stuart j. Russell (2018) Arificial Intelligence A modern Approach 3rd edition 
--Lecture 9: Game Playing 1 - Minimax, Alpha-beta Pruning | Stanford CS221: AI (Autumn 2019)
+GameEnd=game.isEnd(state)
 
-
-## Contact
-Created by Marcos Tagliapietra [(https://www.linkedin.com/in/marcos-e-tagliapietra)]
-Any question feel free to contact me!
-
+while not GameEnd:
+    # Select player
+    player = game.player(state)
+    #Select policy depend on player 1 human or -1 CPU
+    policy = policies[player]
+    # Ask policy to make a move
+    action = policy(game, state)
+    # Advance state
+    state = game.succ(state, action)
+    #get new board state in state[1] due to game.succ
+    game.update_board(state[1])
+    GameEnd=game.isEnd(state)
+    
+if GameEnd>0:  
+    if state[0]==-1:
+        player="HUMAN"
+    elif state[0]==1:
+        player="CPU"
+    print("Player {} has won !!!. Congratulation!".format(player))
+else:
+    print("TIE !!!!")
 

@@ -26,11 +26,7 @@ unwinds.
 
 minimax algorithm 
 
-<<<<<<< HEAD
-![Alt text](/pic/Algo.png?raw=true "minimax algorithm")
-=======
 ![Alt text](/pic/.png?raw=true "minimax algorithm")
->>>>>>> 2ad6371 (update files)
 
 
 
@@ -160,15 +156,9 @@ Room for improvement:
 
 
 ## Bibliography/Acknowledgements
-<<<<<<< HEAD
-- Stuart j. Russell (2018) Arificial Intelligence A modern Approach 3rd edition 
-- Lecture 9: Game Playing 1 - Minimax, Alpha-beta Pruning | Stanford CS221: AI (Autumn 2019)
-
-=======
 -Stuart j. Russell (2018) Arificial Intelligence A modern Approach 3rd edition 
 -Lecture 9: Game Playing 1 - Minimax, Alpha-beta Pruning | Stanford CS221: AI (Autumn 2019)
 -Build a Tic-Tac-Toe Game With Python and Tkinter https://realpython.com/tic-tac-toe-python/
->>>>>>> 2ad6371 (update files)
 
 ## Contact
 Created by Marcos Tagliapietra [(https://www.linkedin.com/in/marcos-e-tagliapietra)]

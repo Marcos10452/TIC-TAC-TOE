@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "tic-tac-toe"
+version = "0.1.0"
+description = ""
+authors = ["Marcos <metagliapietra@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10, <3.12.3"
+pandas = "^2.2.1"
+numpy = "^1.26.4"
+tqdm = "^4.66.1"
+#python3-tk=">=3.7, <3.12.3" #tkinter
+#install python3.10-tk. 1) poetry shell 2) sudo apt install python3.10-tk.
+
+[tool.poetry.group.dev.dependencies]
+jupyterlab = "^4.0.5"
+pyarrow="^15.0.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

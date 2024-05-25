@@ -56,10 +56,6 @@ class TicTacToeBoard():
        #Start menu_bar and display
         self.menu_bar()
         self._create_display()
-        
-       
-   
-       
 
     
     

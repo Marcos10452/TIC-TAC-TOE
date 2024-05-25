@@ -56,8 +56,17 @@ class TicTacToeBoard():
        #Start menu_bar and display
         self.menu_bar()
         self._create_display()
-
+        
+        #intercept Tkinter "X" button control (the button that close the window)
+        self.master .protocol('WM_DELETE_WINDOW', self._exti_game)  
     
+    #------------------------------------------------
+    def _exti_game(self):
+        """Exit game using elf.end_game flag"""
+        self.end_game=True
+        self.master.destroy
+        
+    #------------------------------------------------
     
         ##------------------ Menu Bar ----------------------------------------------------------- 
     def menu_bar(self):  
@@ -76,7 +85,6 @@ class TicTacToeBoard():
 
         self.master.config(menu = menubar)
     ##------------------------------------------------------------------------------- 
-    
     
     #--------------- Board ---------------------------- 
 
@@ -240,10 +248,6 @@ class TicTacToeBoard():
             button.config(fg="black")
             button.config(state= "normal")
     
-    def _exti_game(self):
-        """Exit game using elf.end_game flag"""
-        self.end_game=True
-        self.master.destroy
 
     def disable_buttons(self):
         """disable buttons when game has finished """
